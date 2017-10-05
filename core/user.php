@@ -25,9 +25,15 @@ class User
   }
   /* set methods */
   public function setId($id){
-    $id = $this->con->real_escape_string($id);
     $table = $this->con->real_escape_string(self::TABLE);
-    $sql = "SELECT * FROM $table WHERE id = '$id'";
+    if(is_int($id)){//search by id
+      $id = $this->con->real_escape_string($id);
+      $sql = "SELECT * FROM $table WHERE id = '$id'";
+    }
+    else{//search by user
+      $username = $this->con->real_escape_string($id);
+      $sql = "SELECT * FROM $table WHERE username = '$username'";
+    }
     $result = $this->con->query($sql);
     if($row = $result->fetch_assoc()){
       $this->datos = $row;

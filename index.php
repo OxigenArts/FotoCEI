@@ -15,7 +15,13 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-require_once 'vendor/autoload.php';
+require_once('vendor/autoload.php');
+require_once('core/user.php');
+require_once('core/order.php');
+require_once('core/order_options.php');
+require_once('core/option.php');
+require_once('core/group.php');
+require_once('core/file.php');
 
 $app = new \Slim\App;
 
@@ -23,12 +29,12 @@ $rutes = array(
   'get' => array(
     '/user' => 'views/user/get.php',
     '/user/{id}' => 'views/user/get.php',
-    '/paper' => 'views/paper/get.php',
-    '/paper/{id}' => 'views/paper/get.php',
+    '/group' => 'views/group/get.php',
+    '/group/{id}' => 'views/group/get.php',
     '/option' => 'views/option/get.php',
     '/option/{id}' => 'views/option/get.php',
-    '/order_option' => 'views/order_option/get.php',
-    '/order_option/{id}' => 'views/order_option/get.php',
+    '/order_options' => 'views/order_options/get.php',
+    '/order_options/{id}' => 'views/order_options/get.php',
     '/file' => 'views/file/get.php',
     '/file/{id}' => 'views/file/get.php',
     '/order' => 'views/order/get.php',
@@ -36,27 +42,27 @@ $rutes = array(
   ),
   'post' => array(
     '/user' => 'views/user/post.php',
-    '/paper' => 'views/paper/post.php',
+    '/group' => 'views/group/post.php',
     '/option' => 'views/option/post.php',
-    '/order_option' => 'views/order_option/post.php',
+    '/order_options' => 'views/order_options/post.php',
     '/file' => 'views/file/post.php',
     '/order' => 'views/order/post.php'
   ),
   'delete' => array(
-    '/user' => 'views/user/delete.php',
-    '/paper' => 'views/paper/delete.php',
-    '/option' => 'views/option/delete.php',
-    '/order_option' => 'views/order_option/delete.php',
-    '/file' => 'views/file/delete.php',
-    '/order' => 'views/order/delete.php'
+    '/user/{id}' => 'views/user/delete.php',
+    '/group/{id}' => 'views/group/delete.php',
+    '/option/{id}' => 'views/option/delete.php',
+    '/order_options/{id}' => 'views/order_options/delete.php',
+    '/file/{id}' => 'views/file/delete.php',
+    '/order/{id}' => 'views/order/delete.php'
   ),
   'patch' => array(
-    '/user' => 'views/user/patch.php',
-    '/paper' => 'views/paper/patch.php',
-    '/option' => 'views/option/patch.php',
-    '/order_option' => 'views/order_option/patch.php',
-    '/file' => 'views/file/patch.php',
-    '/order' => 'views/order/patch.php'
+    '/user/{id}' => 'views/user/patch.php',
+    '/group/{id}' => 'views/group/patch.php',
+    '/option/{id}' => 'views/option/patch.php',
+    '/order_options/{id}' => 'views/order_options/patch.php',
+    '/file/{id}' => 'views/file/patch.php',
+    '/order/{id}' => 'views/order/patch.php'
   )
 );
 
