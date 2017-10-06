@@ -71,7 +71,7 @@ class User
     $this->phone = $value;
   }
   /* get methods */
-  public static function getAllId($author_id = null){
+  public static function getAllId(){
     require_once(dirname(__FILE__).'/mysql.php');
     $con = getConnection();
     $table = $con->real_escape_string(self::TABLE);
