@@ -26,7 +26,7 @@ class User
   /* set methods */
   public function setId($id){
     $table = $this->con->real_escape_string(self::TABLE);
-    if(is_int($id)){//search by id
+    if(is_int($id) || is_numeric($id)){//search by id
       $id = $this->con->real_escape_string($id);
       $sql = "SELECT * FROM $table WHERE id = '$id'";
     }
@@ -71,6 +71,22 @@ class User
     $this->phone = $value;
   }
   /* get methods */
+  public static function getAllId($author_id = null){
+    require_once(dirname(__FILE__).'/mysql.php');
+    $con = getConnection();
+    $table = $con->real_escape_string(self::TABLE);
+    $sql = "SELECT id FROM $table";
+    $toreturn = array();
+    if($result = $con->query($sql)){
+      while($row = $result->fetch_assoc()){
+        array_push($toreturn,$row['id']);
+      }
+      return $toreturn;
+    }
+    else{
+      return false;
+    }
+  }
   public function getId(){
     return $this->id;
   }
@@ -107,7 +123,7 @@ class User
     $email = $this->con->real_escape_string($this->email);
     $phone = $this->con->real_escape_string($this->phone);
     $sql =  "INSERT INTO $table
-            (  username,   password,   admin,   name,   lastname,   email,   phone)
+    (  username,   password,   admin,   name,   lastname,   email,   phone)
     VALUES  ('$username','$password','$admin','$name','$lastname','$email','$phone')";
     return $this->con->query($sql);
   }

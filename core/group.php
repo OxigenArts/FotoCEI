@@ -41,6 +41,22 @@ class Group
     $this->name = $value;
   }
   /* get methods */
+  public static function getAllId($author_id = null){
+    require_once(dirname(__FILE__).'/mysql.php');
+    $con = getConnection();
+    $table = $con->real_escape_string(self::TABLE);
+    $sql = "SELECT id FROM $table";
+    $toreturn = array();
+    if($result = $con->query($sql)){
+      while($row = $result->fetch_assoc()){
+        array_push($toreturn,$row['id']);
+      }
+      return $toreturn;
+    }
+    else{
+      return false;
+    }
+  }
   public function getId(){
     return $this->id;
   }
