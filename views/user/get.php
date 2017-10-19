@@ -7,11 +7,12 @@ $admin = new User($username);
 $log = new Log();
 $log->setUser($admin->getId());
 
-if(isset($username) && isset($password) && $admin->getAdmin() == "1" && $admin->getPassword() == $password){
+$user_id= $request->getAttribute('id') != null ? $request->getAttribute('id') : null;
+$user = new User($user_id);
+
+if(isset($username) && isset($password) && ($admin->getAdmin() == "1" || $admin->getUsername() == $user->getUsername()) && $admin->getPassword() == $password){
   if($request->getAttribute('id') != null){
     //user/{id} route
-    $user_id= (int)$request->getAttribute('id');
-    $user = new User($user_id);
     if(isset($user->datos) && (is_array($user->datos) || is_object($user->datos))){
       $result = array('status' => true, 'result' => $user->datos);
     }
