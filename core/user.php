@@ -112,6 +112,9 @@ class User
     return $this->phone;
   }
   /* db actions methods */
+  public function getlastId(){
+    return $this->con->insert_id;
+  }
   public function dbInsert(){
     $table = $this->con->real_escape_string(self::TABLE);
     $id = $this->con->real_escape_string($this->id);

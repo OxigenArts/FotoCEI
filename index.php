@@ -22,7 +22,8 @@ require_once('core/order_options.php');
 require_once('core/option.php');
 require_once('core/group.php');
 require_once('core/file.php');
-
+require_once('core/log.php');
+require_once('core/lang.php');
 $app = new \Slim\App;
 
 $rutes = array(
@@ -70,7 +71,6 @@ $rutes = array(
 foreach ($rutes['get'] as $rute => $file) {
   $app->get($rute, function (Request $request, Response $response) use ($file) {
     include($file);
-
   });
 }
 
